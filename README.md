@@ -147,7 +147,7 @@ npm run dev
 
 ## 🎓 Projet universitaire
 
-Ce projet a été développé dans le cadre d'un cours de Data Engineering, Machine Learning et MLOps.
+Ce projet a été développé dans le cadre d'un cours de Machine learning.
 
 **Objectifs pédagogiques accomplis :**
 - ✅ Pipeline ETL complet (PDF → Chunks → Embeddings)
@@ -247,10 +247,13 @@ Projet universitaire - Usage éducatif
 ---
 
 ## 👥 Auteurs
-
+Asmae Serji 
+Amina
+Anas
+Hafsa
+Fatem Zahra
 **Équipe AAAHF**  
-Projet Data Engineering & ML/MLOps  
-Université [À COMPLÉTER]
+Projet ML
 
 ---
 
