@@ -1,0 +1,239 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+/* ISO Compliance Chatbot Design System
+   Professional, trustworthy design with deep navy blues and crisp typography
+*/
+
+@layer base {
+  :root {
+    /* Core brand colors - Deep navy trust palette */
+    --background: 210 25% 97%;
+    --foreground: 222 47% 11%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+
+    /* Primary - Deep navy blue */
+    --primary: 222 47% 20%;
+    --primary-foreground: 210 40% 98%;
+
+    /* Secondary - Soft blue-gray */
+    --secondary: 214 32% 91%;
+    --secondary-foreground: 222 47% 11%;
+
+    /* Muted - Light gray-blue */
+    --muted: 210 20% 94%;
+    --muted-foreground: 215 16% 47%;
+
+    /* Accent - Professional teal */
+    --accent: 187 75% 35%;
+    --accent-foreground: 0 0% 100%;
+
+    /* Success - Compliance green */
+    --success: 142 76% 36%;
+    --success-foreground: 0 0% 100%;
+
+    /* Warning - Attention amber */
+    --warning: 38 92% 50%;
+    --warning-foreground: 0 0% 0%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 214 32% 87%;
+    --input: 214 32% 91%;
+    --ring: 222 47% 20%;
+
+    --radius: 0.75rem;
+
+    /* Source citation card */
+    --source-bg: 210 30% 96%;
+    --source-border: 214 32% 82%;
+    --source-accent: 187 75% 35%;
+
+    /* Chat bubbles */
+    --user-bubble: 222 47% 20%;
+    --user-bubble-foreground: 210 40% 98%;
+    --assistant-bubble: 0 0% 100%;
+    --assistant-bubble-foreground: 222 47% 11%;
+
+    /* Sidebar */
+    --sidebar-background: 222 47% 11%;
+    --sidebar-foreground: 210 40% 90%;
+    --sidebar-primary: 187 75% 45%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 222 47% 18%;
+    --sidebar-accent-foreground: 210 40% 95%;
+    --sidebar-border: 222 47% 18%;
+    --sidebar-ring: 187 75% 45%;
+
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(222 47% 20%), hsl(222 47% 28%));
+    --gradient-accent: linear-gradient(135deg, hsl(187 75% 35%), hsl(187 75% 45%));
+    --gradient-hero: linear-gradient(180deg, hsl(210 25% 97%) 0%, hsl(214 32% 91%) 100%);
+  }
+
+  .dark {
+    --background: 222 47% 8%;
+    --foreground: 210 40% 95%;
+
+    --card: 222 47% 11%;
+    --card-foreground: 210 40% 95%;
+
+    --popover: 222 47% 11%;
+    --popover-foreground: 210 40% 95%;
+
+    --primary: 187 75% 50%;
+    --primary-foreground: 222 47% 8%;
+
+    --secondary: 222 47% 18%;
+    --secondary-foreground: 210 40% 95%;
+
+    --muted: 222 47% 15%;
+    --muted-foreground: 215 20% 65%;
+
+    --accent: 187 75% 45%;
+    --accent-foreground: 0 0% 100%;
+
+    --success: 142 76% 42%;
+    --success-foreground: 0 0% 100%;
+
+    --warning: 38 92% 55%;
+    --warning-foreground: 0 0% 0%;
+
+    --destructive: 0 63% 31%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 222 47% 18%;
+    --input: 222 47% 18%;
+    --ring: 187 75% 50%;
+
+    --source-bg: 222 47% 14%;
+    --source-border: 222 47% 22%;
+    --source-accent: 187 75% 50%;
+
+    --user-bubble: 187 75% 45%;
+    --user-bubble-foreground: 0 0% 100%;
+    --assistant-bubble: 222 47% 14%;
+    --assistant-bubble-foreground: 210 40% 95%;
+
+    --sidebar-background: 222 47% 6%;
+    --sidebar-foreground: 210 40% 90%;
+    --sidebar-primary: 187 75% 50%;
+    --sidebar-primary-foreground: 222 47% 8%;
+    --sidebar-accent: 222 47% 12%;
+    --sidebar-accent-foreground: 210 40% 95%;
+    --sidebar-border: 222 47% 12%;
+    --sidebar-ring: 187 75% 50%;
+
+    --gradient-primary: linear-gradient(135deg, hsl(187 75% 40%), hsl(187 75% 50%));
+    --gradient-accent: linear-gradient(135deg, hsl(222 47% 18%), hsl(222 47% 25%));
+    --gradient-hero: linear-gradient(180deg, hsl(222 47% 8%) 0%, hsl(222 47% 11%) 100%);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+
+  code, pre {
+    font-family: 'JetBrains Mono', monospace;
+  }
+}
+
+@layer components {
+  .chat-container {
+    @apply flex flex-col h-full;
+  }
+
+  .source-card {
+    @apply rounded-lg border p-4 transition-all duration-200;
+    background: hsl(var(--source-bg));
+    border-color: hsl(var(--source-border));
+  }
+
+  .source-card:hover {
+    border-color: hsl(var(--source-accent));
+    box-shadow: 0 4px 12px -2px hsl(var(--source-accent) / 0.15);
+  }
+
+  .user-message {
+    @apply rounded-2xl rounded-br-md px-4 py-3;
+    background: hsl(var(--user-bubble));
+    color: hsl(var(--user-bubble-foreground));
+  }
+
+  .assistant-message {
+    @apply rounded-2xl rounded-bl-md px-4 py-3 border;
+    background: hsl(var(--assistant-bubble));
+    color: hsl(var(--assistant-bubble-foreground));
+    border-color: hsl(var(--border));
+  }
+
+  .typing-indicator {
+    @apply flex gap-1;
+  }
+
+  .typing-indicator span {
+    @apply w-2 h-2 rounded-full bg-muted-foreground/50;
+    animation: typing 1.4s infinite ease-in-out both;
+  }
+
+  .typing-indicator span:nth-child(1) { animation-delay: 0s; }
+  .typing-indicator span:nth-child(2) { animation-delay: 0.2s; }
+  .typing-indicator span:nth-child(3) { animation-delay: 0.4s; }
+}
+
+@layer utilities {
+  .gradient-primary {
+    background: var(--gradient-primary);
+  }
+
+  .gradient-accent {
+    background: var(--gradient-accent);
+  }
+
+  .gradient-hero {
+    background: var(--gradient-hero);
+  }
+
+  .text-gradient {
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+}
+
+@keyframes typing {
+  0%, 80%, 100% {
+    transform: scale(0.8);
+    opacity: 0.5;
+  }
+  40% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.3s ease-out forwards;
+}

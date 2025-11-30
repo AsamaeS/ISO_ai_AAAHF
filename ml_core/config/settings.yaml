@@ -1,0 +1,74 @@
+# ML Core Configuration
+
+# Embeddings configuration
+embeddings:
+  model_name: "BAAI/bge-small-en-v1.5"
+  batch_size: 32
+  device: "cpu"  # Use CPU for Intel GPU compatibility
+  normalize: true
+
+# LLM configuration
+llm:
+  model_name: "llama-3.2-3b"  # Optimized for 8GB RAM
+  # Alternative models:
+  # - "llama-3.1-8b" (requires more RAM but better quality)
+  # - "microsoft/Phi-3-mini-4k-instruct" (alternative lightweight)
+  quantize: true  # 4-bit quantization (essential for 8GB RAM)
+  max_tokens: 512
+  temperature: 0.7
+  top_p: 0.9
+
+# Chunking configuration
+chunking:
+  target_tokens: 400
+  min_tokens: 200
+  max_tokens: 600
+  overlap_tokens: 50
+  encoding_name: "cl100k_base"  # GPT-4 tokenizer
+
+# PDF extraction configuration
+pdf_extraction:
+  use_paddleocr: true
+  use_tesseract: true
+  tesseract_lang: "eng+fra"  # English + French for ISO docs
+  min_chars_threshold: 100  # Threshold to detect scanned pages
+
+# Text cleaning configuration
+text_cleaning:
+  remove_page_numbers: true
+  remove_headers_footers: true
+  normalize_unicode: true
+  preserve_iso_sections: true
+
+# FAISS index configuration
+faiss:
+  index_type: "flat"  # "flat" for exact search, "hnsw" for approximate
+  metric: "cosine"  # "l2" or "cosine"
+  hnsw_m: 32  # HNSW parameter (only used if index_type="hnsw")
+  hnsw_ef_construction: 200
+
+# Search configuration
+search:
+  default_top_k: 5
+  max_top_k: 20
+  min_score: null  # Optional minimum similarity score
+
+# API configuration
+api:
+  host: "0.0.0.0"
+  port: 8000
+  cors_origins: ["*"]  # Configure for production
+  log_level: "info"
+
+# Data directories
+data:
+  pdf_input_dir: "./data/pdfs"
+  chunks_output_dir: "./data/chunks"
+  index_dir: "./data/index"
+  models_cache_dir: "./models"
+
+# Logging configuration
+logging:
+  level: "INFO"  # DEBUG, INFO, WARNING, ERROR
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  file: null  # Optional log file path

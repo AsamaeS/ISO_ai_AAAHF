@@ -1,0 +1,59 @@
+# Docker Compose - Projet Complet
+version: '3.8'
+
+services:
+  # ML Core Backend API
+  ml-backend:
+    build:
+      context: ./ml_core
+      dockerfile: Dockerfile
+    container_name: iso-ml-backend
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./ml_core/data:/data
+      - ./ml_core/models:/models
+      - ml-cache:/root/.cache/huggingface
+    environment:
+      - PYTHONUNBUFFERED=1
+      - HF_HOME=/models
+      - TRANSFORMERS_CACHE=/models
+    restart: unless-stopped
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:8000/health" ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 120s
+    deploy:
+      resources:
+        limits:
+          cpus: '4'
+          memory: 8G
+        reservations:
+          memory: 4G
+
+  # React Frontend
+  frontend:
+    build:
+      context: ./iso-doc-navigator-main
+      dockerfile: Dockerfile
+    container_name: iso-frontend
+    ports:
+      - "5173:5173"
+    environment:
+      - VITE_ML_API_URL=http://ml-backend:8000
+    depends_on:
+      ml-backend:
+        condition: service_healthy
+    restart: unless-stopped
+
+volumes:
+  ml-cache:
+    name: huggingface-cache
+
+# Usage:
+# docker-compose up -d          # Start all services
+# docker-compose down           # Stop all services
+# docker-compose logs -f        # View logs
+# docker-compose ps             # Check status

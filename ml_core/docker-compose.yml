@@ -1,0 +1,40 @@
+# Docker Compose for ML Core RAG Pipeline
+version: '3.8'
+
+services:
+  api:
+    build: .
+    image: ml-core-rag:latest
+    container_name: ml-core-api
+    ports:
+      - "8000:8000"
+    volumes:
+      # Mount data directories
+      - ./data/pdfs:/data/pdfs          # Input PDFs
+      - ./data/chunks:/data/chunks      # Processed chunks
+      - ./data/index:/data/index        # FAISS index
+      - ./models:/models                # Model cache
+    environment:
+      - PYTHONUNBUFFERED=1
+      - HF_HOME=/models                 # HuggingFace cache
+      - TRANSFORMERS_CACHE=/models
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+    deploy:
+      resources:
+        limits:
+          cpus: '4'
+          memory: 8G
+        reservations:
+          memory: 4G
+
+# Usage:
+# docker-compose up -d          # Start services
+# docker-compose down           # Stop services
+# docker-compose logs -f api    # View logs
+# docker-compose exec api bash  # Access container shell

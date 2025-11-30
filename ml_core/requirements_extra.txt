@@ -1,0 +1,4 @@
+# Additional Python packages for Word and Excel support
+python-docx>=1.1.0
+openpyxl>=3.1.0
+xlrd>=2.0.1
