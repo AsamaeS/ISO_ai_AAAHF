@@ -247,7 +247,7 @@ Projet universitaire - Usage éducatif
 ---
 
 ## 👥 Auteurs
-Asmae Serji 
+Asmae 
 Amina
 Anas
 Hafsa
